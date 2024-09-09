@@ -3,12 +3,15 @@
 
 <PageTitle>Todo</PageTitle>
 
-<h3>Todo</h3>
+<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
 
     <ul>
-        @foreach (var Todo in todos)
+        @foreach (var todo in todos)
         {
-            <li>@Todo.Title</li>
+            <li>
+                <input type="checkbox" @bind="todo.IsDone" />
+                <input @bind="todo.Title" />
+            </li>
         }
     </ul>
 
@@ -21,6 +24,10 @@
 
     private void AddTodo()
     {
-        //Todo: Add the todo
+        if(!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
     }
 }
