@@ -1,7 +1,26 @@
 ﻿@page "/todo"
 @rendermode InteractiveServer
+
+<PageTitle>Todo</PageTitle>
+
 <h3>Todo</h3>
 
-@code {
+    <ul>
+        @foreach (var Todo in todos)
+        {
+            <li>@Todo.Title</li>
+        }
+    </ul>
 
+    <input placeholder="Something To Do" @bind="newTodo" />
+    <button @onclick="AddTodo">Add Todo</button>
+
+@code {
+    private string? newTodo;
+    private List<TodoItem> todos = new();
+
+    private void AddTodo()
+    {
+        //Todo: Add the todo
+    }
 }
